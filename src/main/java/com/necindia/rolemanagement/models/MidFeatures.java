@@ -34,7 +34,7 @@ public class MidFeatures {
 	}
 
 	public MidFeatures() {
-		
+		super();
 	}
 
 	public int getMidFeatureId() {

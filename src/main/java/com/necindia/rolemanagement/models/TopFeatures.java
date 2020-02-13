@@ -26,7 +26,7 @@ public class TopFeatures {
 	private List<MidFeatures> midFeatures;
 	
 	public TopFeatures() {
-		
+		super();
 	}
 
 	public TopFeatures(int topFeatureId, String topFeatureName, List<MidFeatures> midFeatures) {
