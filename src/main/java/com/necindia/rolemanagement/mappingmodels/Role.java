@@ -5,20 +5,21 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 //===============================================================================
 //	A Role Entity will contain all the Roles.
-//	Also, it has OneToMany mapping with the Role Top Feature Entity which creates
-//	a Foreign Key Column in Role Top Features Entity.
 //===============================================================================
 
 @Entity
 @Table(name = "role")
+@JsonIgnoreProperties(ignoreUnknown = true, allowGetters = true)
 public class Role {
 	
 	@Id
@@ -28,16 +29,25 @@ public class Role {
 	@Column(name = "role_name")
 	private String roleName;
 	
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "fk_role_id", referencedColumnName = "role_id")
-	private List<RoleTopFeatures> roleTopFeature;
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "role", fetch = FetchType.EAGER)
+	List<RoleTopFeatures> listOfRoleTop;
+	
 
-	public Role(int roleId, String roleName, List<RoleTopFeatures> roleTopFeature) {
+	public Role(int roleId, String roleName, List<RoleTopFeatures> listOfRoleTop) {
 		super();
 		this.roleId = roleId;
 		this.roleName = roleName;
-		this.roleTopFeature = roleTopFeature;	
+		this.listOfRoleTop = listOfRoleTop;
 	}
+
+	public List<RoleTopFeatures> getListOfRoleTop() {
+		return listOfRoleTop;
+	}
+
+	public void setListOfRoleTop(List<RoleTopFeatures> listOfRoleTop) {
+		this.listOfRoleTop = listOfRoleTop;
+	}
+
 
 	public Role() {
 		
@@ -59,13 +69,12 @@ public class Role {
 		this.roleName = roleName;
 	}
 
-	public List<RoleTopFeatures> getRoleTopFeature() {
-		return roleTopFeature;
+	@Override
+	public String toString() {
+		return "Role [roleId=" + roleId + ", roleName=" + roleName + ", listOfRoleTop=" + listOfRoleTop + "]";
 	}
-
-	public void setRoleTopFeature(List<RoleTopFeatures> roleTopFeature) {
-		this.roleTopFeature = roleTopFeature;
-	}	
+	
+	
 	
 
 }
