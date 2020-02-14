@@ -5,6 +5,13 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+
+//====================================================================================
+//	It has the list of all the Bottom Features.
+//	Also, it has Foreign Key column for Mid Features.
+//====================================================================================
+
+
 @Entity
 @Table(name = "bottom_features")
 public class BottomFeatures {

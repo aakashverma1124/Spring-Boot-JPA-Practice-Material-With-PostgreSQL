@@ -10,6 +10,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+//====================================================================================
+//	It has the list of all the Mid Features.
+//	Also, it has Foreign Key column for Top Features.
+//	Also, it has OneToMany mapping with the Bottom Features Entity and Role Mid Feature
+//	Entity which creates a Foreign Key Column in Bottom Features Entity and 
+//	Role Bottom Feature Entity respectively.
+//====================================================================================
+
 @Entity
 @Table(name = "mid_features")
 public class MidFeatures {
