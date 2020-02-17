@@ -28,7 +28,7 @@ public class Role {
 	@Column(name = "role_name")
 	private String roleName;
 	
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "role", fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "role")
 	List<RoleTopFeatures> listOfRoleTop;
 	
 

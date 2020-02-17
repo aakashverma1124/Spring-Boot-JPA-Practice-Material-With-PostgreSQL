@@ -29,11 +29,11 @@ public class RoleTopFeatures {
 	@Column(name = "role_top_feature_id")
 	private int roleTopFeatureId;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne
 	@JoinColumn(name = "fk_role_id", referencedColumnName = "role_id")
 	private Role role;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne
 	@JoinColumn(name = "fk_top_feature_id", referencedColumnName = "top_feature_id")
 	private TopFeatures topFeatures;
 	

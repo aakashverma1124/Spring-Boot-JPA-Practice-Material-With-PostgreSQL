@@ -32,7 +32,7 @@ public class TopFeatures {
 	@Column(name = "top_feature_name")
 	private String topFeatureName;
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "fk_top_feature_id", referencedColumnName = "top_feature_id")
 	private List<MidFeatures> midFeatures;
 	

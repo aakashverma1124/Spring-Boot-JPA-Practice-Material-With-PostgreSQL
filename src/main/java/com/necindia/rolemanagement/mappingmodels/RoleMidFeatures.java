@@ -21,11 +21,11 @@ public class RoleMidFeatures {
 	@Column(name = "role_mid_feature_id")
 	private int roleMidFeatureId;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne
 	@JoinColumn(name = "fk_role_top_feature_id", referencedColumnName = "role_top_feature_id")
 	private RoleTopFeatures roleTopFeature;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne
 	@JoinColumn(name = "fk_mid_feature_id", referencedColumnName = "mid_feature_id")
 	private MidFeatures midFeatures;
 
