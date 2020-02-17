@@ -5,10 +5,13 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 //====================================================================================
 //	It has the list of all the Mid Features.
@@ -20,6 +23,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "mid_features")
+@JsonIgnoreProperties(ignoreUnknown = true, allowGetters = true)
 public class MidFeatures {
 
 	@Id
@@ -29,7 +33,7 @@ public class MidFeatures {
 	@Column(name = "mid_feature_name")
 	private String midFeatureName;
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "fk_mid_feature_id", referencedColumnName = "mid_feature_id")
 	private List<BottomFeatures> bottomFeatures;
 	
@@ -42,7 +46,7 @@ public class MidFeatures {
 	}
 
 	public MidFeatures() {
-		super();
+	
 	}
 
 	public int getMidFeatureId() {
@@ -66,6 +70,12 @@ public class MidFeatures {
 		this.midFeatureId = midFeatureId;
 		this.midFeatureName = midFeatureName;
 		this.bottomFeatures = bottomFeatures;
+	}
+
+	@Override
+	public String toString() {
+		return "MidFeatures [midFeatureId=" + midFeatureId + ", midFeatureName=" + midFeatureName + ", bottomFeatures="
+				+ bottomFeatures + "]";
 	}
 	
 	

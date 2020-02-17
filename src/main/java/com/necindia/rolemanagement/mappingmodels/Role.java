@@ -9,7 +9,6 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
@@ -39,6 +38,7 @@ public class Role {
 		this.roleName = roleName;
 		this.listOfRoleTop = listOfRoleTop;
 	}
+
 
 	public List<RoleTopFeatures> getListOfRoleTop() {
 		return listOfRoleTop;

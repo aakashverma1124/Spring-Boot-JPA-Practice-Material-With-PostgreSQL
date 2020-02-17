@@ -1,5 +1,7 @@
 package com.necindia.rolemanagement.mappingmodels;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -27,18 +29,28 @@ public class RoleTopFeatures {
 	@Column(name = "role_top_feature_id")
 	private int roleTopFeatureId;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_role_id", referencedColumnName = "role_id")
 	private Role role;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_top_feature_id", referencedColumnName = "top_feature_id")
 	private TopFeatures topFeatures;
 	
+	
+	public RoleTopFeatures(int roleTopFeatureId, Role role, TopFeatures topFeatures,
+			List<RoleMidFeatures> listOfRoleMid) {
+		super();
+		this.roleTopFeatureId = roleTopFeatureId;
+		this.role = role;
+		this.topFeatures = topFeatures;	
+	}
+
 	public RoleTopFeatures() {
 		
 	}
 
+	@JsonIgnore
 	public int getRoleTopFeatureId() {
 		return roleTopFeatureId;
 	}
@@ -60,21 +72,16 @@ public class RoleTopFeatures {
 		return topFeatures;
 	}
 
+	@Override
+	public String toString() {
+		return "RoleTopFeatures [roleTopFeatureId=" + roleTopFeatureId + ", role=" + role + ", topFeatures="
+				+ topFeatures + "]";
+	}
+
 	public void setTopFeatures(TopFeatures topFeatures) {
 		this.topFeatures = topFeatures;
 	}
 
-	public RoleTopFeatures(int roleTopFeatureId, Role role, TopFeatures topFeatures) {
-		super();
-		this.roleTopFeatureId = roleTopFeatureId;
-		this.role = role;
-		this.topFeatures = topFeatures;
-	}
-
-	@Override
-	public String toString() {
-		return "RoleTopFeatures [roleTopFeatureId=" + roleTopFeatureId + ", topFeatures=" + topFeatures + "]";
-	}
 	
 	
 	

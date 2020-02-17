@@ -5,10 +5,13 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 //====================================================================================
@@ -19,6 +22,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "top_features")
+@JsonIgnoreProperties(ignoreUnknown = true, allowGetters = true)
 public class TopFeatures {
 	
 	@Id
@@ -28,7 +32,7 @@ public class TopFeatures {
 	@Column(name = "top_feature_name")
 	private String topFeatureName;
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_top_feature_id", referencedColumnName = "top_feature_id")
 	private List<MidFeatures> midFeatures;
 	
@@ -66,4 +70,12 @@ public class TopFeatures {
 	public void setMidFeatures(List<MidFeatures> midFeatures) {
 		this.midFeatures = midFeatures;
 	}
+
+	@Override
+	public String toString() {
+		return "TopFeatures [topFeatureId=" + topFeatureId + ", topFeatureName=" + topFeatureName + ", midFeatures="
+				+ midFeatures + "]";
+	}
+	
+	
 }
