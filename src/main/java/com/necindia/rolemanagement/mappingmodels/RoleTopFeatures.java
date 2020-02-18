@@ -30,7 +30,7 @@ import com.necindia.rolemanagement.models.TopFeatures;
 public class RoleTopFeatures {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "role_top_feature_id", unique = true, nullable = false)
 	private int roleTopFeatureId;
 	

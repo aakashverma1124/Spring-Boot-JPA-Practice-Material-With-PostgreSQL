@@ -24,7 +24,7 @@ import com.necindia.rolemanagement.models.MidFeatures;
 public class RoleMidFeatures {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "role_mid_feature_id", unique = true, nullable = false)
 	private int roleMidFeatureId;
 	

@@ -21,7 +21,7 @@ import com.necindia.rolemanagement.models.BottomFeatures;
 public class RoleBottomFeatures {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "role_bottom_feature_id", unique = true, nullable = false)
 	private int roleBottomFeatureId;
 	
