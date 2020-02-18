@@ -2,12 +2,14 @@ package com.necindia.rolemanagement.mappingmodels;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -29,13 +31,18 @@ public class RoleTopFeatures {
 	@Column(name = "role_top_feature_id")
 	private int roleTopFeatureId;
 	
-	@ManyToOne
+	@JsonIgnore
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "fk_role_id", referencedColumnName = "role_id")
 	private Role role;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_top_feature_id", referencedColumnName = "top_feature_id")
 	private TopFeatures topFeatures;
+	
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+	@JoinColumn(name = "fk_role_top_feature_id", referencedColumnName = "role_top_feature_id")
+	List<RoleMidFeatures> listOfRoleMid;
 	
 	
 	public RoleTopFeatures(int roleTopFeatureId, Role role, TopFeatures topFeatures,
@@ -43,7 +50,16 @@ public class RoleTopFeatures {
 		super();
 		this.roleTopFeatureId = roleTopFeatureId;
 		this.role = role;
-		this.topFeatures = topFeatures;	
+		this.topFeatures = topFeatures;
+		this.listOfRoleMid = listOfRoleMid;
+	}
+
+	public List<RoleMidFeatures> getListOfRoleMid() {
+		return listOfRoleMid;
+	}
+
+	public void setListOfRoleMid(List<RoleMidFeatures> listOfRoleMid) {
+		this.listOfRoleMid = listOfRoleMid;
 	}
 
 	public RoleTopFeatures() {
@@ -75,7 +91,7 @@ public class RoleTopFeatures {
 	@Override
 	public String toString() {
 		return "RoleTopFeatures [roleTopFeatureId=" + roleTopFeatureId + ", role=" + role + ", topFeatures="
-				+ topFeatures + "]";
+				+ topFeatures + ", listOfRoleMid=" + listOfRoleMid + "]";
 	}
 
 	public void setTopFeatures(TopFeatures topFeatures) {

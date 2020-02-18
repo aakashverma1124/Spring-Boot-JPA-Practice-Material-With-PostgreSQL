@@ -11,10 +11,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-
-//===============================================================================
-//	A Role Entity will contain all the Roles.
-//===============================================================================
+/*===============================================================================
+	A Role Entity will contain all the Roles.
+===============================================================================
+*/
 
 @Entity
 @Table(name = "role")
@@ -28,7 +28,7 @@ public class Role {
 	@Column(name = "role_name")
 	private String roleName;
 	
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "role")
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "role", fetch = FetchType.LAZY)
 	List<RoleTopFeatures> listOfRoleTop;
 	
 

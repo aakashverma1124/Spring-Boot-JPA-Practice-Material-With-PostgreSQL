@@ -2,24 +2,26 @@ package com.necindia.rolemanagement.models;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-//====================================================================================
-//	It has the list of all the Mid Features.
-//	Also, it has Foreign Key column for Top Features.
-//	Also, it has OneToMany mapping with the Bottom Features Entity and Role Mid Feature
-//	Entity which creates a Foreign Key Column in Bottom Features Entity and 
-//	Role Bottom Feature Entity respectively.
-//====================================================================================
+/*====================================================================================
+	It has the list of all the Mid Features.
+	Also, it has Foreign Key column for Top Features.
+	Also, it has OneToMany mapping with the Bottom Features Entity and Role Mid Feature
+	Entity which creates a Foreign Key Column in Bottom Features Entity and 
+	Role Bottom Feature Entity respectively.
+====================================================================================
+*/
 
 @Entity
 @Table(name = "mid_features")
@@ -29,14 +31,27 @@ public class MidFeatures {
 	@Id
 	@Column(name = "mid_feature_id")
 	private int midFeatureId;
-	
+
 	@Column(name = "mid_feature_name")
 	private String midFeatureName;
-	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "fk_mid_feature_id", referencedColumnName = "mid_feature_id")
+
+	@JsonIgnore
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "fk_top_feature_id", referencedColumnName = "top_feature_id")
+	private TopFeatures topFeatures;
+
+	@OneToMany(fetch = FetchType.LAZY)
 	private List<BottomFeatures> bottomFeatures;
-	
+
+	public TopFeatures getTopFeatures() {
+		return topFeatures;
+	}
+
+	public void setTopFeatures(TopFeatures topFeatures) {
+		this.topFeatures = topFeatures;
+	}
+
+	@JsonIgnore
 	public List<BottomFeatures> getBottomFeatures() {
 		return bottomFeatures;
 	}
@@ -46,7 +61,7 @@ public class MidFeatures {
 	}
 
 	public MidFeatures() {
-	
+
 	}
 
 	public int getMidFeatureId() {
@@ -64,23 +79,11 @@ public class MidFeatures {
 	public void setMidFeatureName(String midFeatureName) {
 		this.midFeatureName = midFeatureName;
 	}
-
-	public MidFeatures(int midFeatureId, String midFeatureName, List<BottomFeatures> bottomFeatures) {
-		super();
-		this.midFeatureId = midFeatureId;
-		this.midFeatureName = midFeatureName;
-		this.bottomFeatures = bottomFeatures;
-	}
-
+ 
 	@Override
 	public String toString() {
 		return "MidFeatures [midFeatureId=" + midFeatureId + ", midFeatureName=" + midFeatureName + ", bottomFeatures="
 				+ bottomFeatures + "]";
 	}
-	
-	
-	
-	
-	
 
 }

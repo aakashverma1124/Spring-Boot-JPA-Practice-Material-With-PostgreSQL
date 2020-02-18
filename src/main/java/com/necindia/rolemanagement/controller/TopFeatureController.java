@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,5 +32,6 @@ public class TopFeatureController {
             .orElseThrow(() -> new Exception("Top Feature not found for Id:: " + topFeatureId));
         return ResponseEntity.ok().body(topFeature);
     }
+
 	
 }
