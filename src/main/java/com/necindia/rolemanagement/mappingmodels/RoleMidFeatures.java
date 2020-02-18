@@ -6,6 +6,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -22,11 +24,12 @@ import com.necindia.rolemanagement.models.MidFeatures;
 public class RoleMidFeatures {
 	
 	@Id
-	@Column(name = "role_mid_feature_id")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@Column(name = "role_mid_feature_id", unique = true, nullable = false)
 	private int roleMidFeatureId;
 	
 	@JsonIgnore
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = RoleTopFeatures.class)
 	@JoinColumn(name = "fk_role_top_feature_id", referencedColumnName = "role_top_feature_id")
 	private RoleTopFeatures roleTopFeature;
 	
