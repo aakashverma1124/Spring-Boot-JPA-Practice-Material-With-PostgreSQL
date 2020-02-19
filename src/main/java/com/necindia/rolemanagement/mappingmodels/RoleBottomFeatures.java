@@ -21,11 +21,11 @@ import com.necindia.rolemanagement.models.BottomFeatures;
 public class RoleBottomFeatures {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column(name = "role_bottom_feature_id", unique = true, nullable = false)
 	private int roleBottomFeatureId;
 	
-	@JsonIgnore
+
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = RoleMidFeatures.class)
 	@JoinColumn(name = "fk_role_mid_feature_id", referencedColumnName = "role_mid_feature_id")
 	private RoleMidFeatures roleMidFeature;
@@ -38,7 +38,6 @@ public class RoleBottomFeatures {
 		
 	}
 
-	@JsonIgnore
 	public int getRoleBottomFeatureId() {
 		return roleBottomFeatureId;
 	}
@@ -47,7 +46,7 @@ public class RoleBottomFeatures {
 		this.roleBottomFeatureId = roleBottomFeatureId;
 	}
 
-	
+	@JsonIgnore
 	public RoleMidFeatures getRoleMidFeature() {
 		return roleMidFeature;
 	}

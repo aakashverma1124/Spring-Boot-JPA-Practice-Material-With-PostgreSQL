@@ -9,10 +9,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import org.hibernate.type.TrueFalseType;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -34,7 +33,8 @@ public class Role {
 	@Column(name = "role_name")
 	private String roleName;
 	
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "role", fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+	@JoinColumn(name = "fk_role_id", referencedColumnName = "role_id")
 	List<RoleTopFeatures> listOfRoleTop;
 	
 

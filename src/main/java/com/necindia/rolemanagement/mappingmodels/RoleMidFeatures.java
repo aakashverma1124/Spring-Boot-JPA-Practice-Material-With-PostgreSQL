@@ -24,11 +24,11 @@ import com.necindia.rolemanagement.models.MidFeatures;
 public class RoleMidFeatures {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column(name = "role_mid_feature_id", unique = true, nullable = false)
 	private int roleMidFeatureId;
 	
-	@JsonIgnore
+	
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = RoleTopFeatures.class)
 	@JoinColumn(name = "fk_role_top_feature_id", referencedColumnName = "role_top_feature_id")
 	private RoleTopFeatures roleTopFeature;
@@ -45,7 +45,7 @@ public class RoleMidFeatures {
 		
 	}
 
-	@JsonIgnore
+
 	public int getRoleMidFeatureId() {
 		return roleMidFeatureId;
 	}
@@ -54,7 +54,7 @@ public class RoleMidFeatures {
 		this.roleMidFeatureId = roleMidFeatureId;
 	}
 
-	
+	@JsonIgnore
 	public RoleTopFeatures getRoleTopFeature() {
 		return roleTopFeature;
 	}

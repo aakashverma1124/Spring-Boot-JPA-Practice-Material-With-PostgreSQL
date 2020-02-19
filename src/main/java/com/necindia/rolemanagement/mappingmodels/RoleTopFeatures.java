@@ -30,11 +30,11 @@ import com.necindia.rolemanagement.models.TopFeatures;
 public class RoleTopFeatures {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column(name = "role_top_feature_id", unique = true, nullable = false)
 	private int roleTopFeatureId;
 	
-	@JsonIgnore
+	
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = Role.class)
 	@JoinColumn(name = "fk_role_id", referencedColumnName = "role_id")
 	private Role role;
@@ -69,7 +69,6 @@ public class RoleTopFeatures {
 		
 	}
 
-	@JsonIgnore
 	public int getRoleTopFeatureId() {
 		return roleTopFeatureId;
 	}
