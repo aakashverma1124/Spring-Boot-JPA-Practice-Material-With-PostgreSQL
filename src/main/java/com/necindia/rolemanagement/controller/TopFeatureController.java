@@ -6,10 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.necindia.rolemanagement.models.TopFeatures;
 import com.necindia.rolemanagement.repository.TopFeaturesRepository;
 
@@ -22,7 +20,8 @@ public class TopFeatureController {
 	
 	@GetMapping("/topfeatures")
 	public List<TopFeatures> getTopFeatures() {
-		return topFeatureRepository.findAll();
+		
+		return topFeatureRepository .findAll();
 	}
 	
 	@GetMapping("/topfeatures/{id}")

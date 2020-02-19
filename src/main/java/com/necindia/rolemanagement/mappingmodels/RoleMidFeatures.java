@@ -46,6 +46,7 @@ public class RoleMidFeatures {
 	}
 
 
+	@JsonIgnore
 	public int getRoleMidFeatureId() {
 		return roleMidFeatureId;
 	}

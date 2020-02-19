@@ -69,6 +69,7 @@ public class RoleTopFeatures {
 		
 	}
 
+	@JsonIgnore
 	public int getRoleTopFeatureId() {
 		return roleTopFeatureId;
 	}

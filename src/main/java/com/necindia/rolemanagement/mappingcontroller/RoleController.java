@@ -50,11 +50,12 @@ public class RoleController {
          @Valid @RequestBody Role roleDetails) throws Exception {
         Role role = roleRepository.findById(roleId)
         .orElseThrow(() -> new Exception("Role not found for id :: " + roleId));
-       role.setRoleId(roleDetails.getRoleId());
-       role.setRoleName(roleDetails.getRoleName());
-       role.setListOfRoleTop(roleDetails.getListOfRoleTop());
-       final Role updateRole = roleRepository.save(role);
-       return ResponseEntity.ok(updateRole);
+        roleRepository.delete(role);
+	    role.setRoleId(roleDetails.getRoleId());
+	    role.setRoleName(roleDetails.getRoleName());
+	    role.setListOfRoleTop(roleDetails.getListOfRoleTop());
+	    final Role updateRole = roleRepository.save(role);
+	    return ResponseEntity.ok(updateRole);
     }
 	
 	@DeleteMapping("/deleteRole/{id}")

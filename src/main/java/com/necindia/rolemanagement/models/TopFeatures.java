@@ -47,6 +47,7 @@ public class TopFeatures {
 //		//this.midFeatures = midFeatures;
 //	}
 
+	
 	public int getTopFeatureId() {
 		return topFeatureId;
 	}
@@ -63,7 +64,7 @@ public class TopFeatures {
 		this.topFeatureName = topFeatureName;
 	}
 
-	@JsonIgnore
+	//@JsonIgnore
 	public List<MidFeatures> getMidFeatures() {
 		return midFeatures;
 	}

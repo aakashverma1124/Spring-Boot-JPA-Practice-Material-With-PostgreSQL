@@ -38,6 +38,7 @@ public class RoleBottomFeatures {
 		
 	}
 
+	@JsonIgnore
 	public int getRoleBottomFeatureId() {
 		return roleBottomFeatureId;
 	}
