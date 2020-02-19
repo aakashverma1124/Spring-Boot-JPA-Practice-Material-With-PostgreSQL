@@ -51,7 +51,7 @@ public class MidFeatures {
 		this.topFeatures = topFeatures;
 	}
 
-	//@JsonIgnore
+	@JsonIgnore
 	public List<BottomFeatures> getBottomFeatures() {
 		return bottomFeatures;
 	}

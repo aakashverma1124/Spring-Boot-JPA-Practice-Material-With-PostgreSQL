@@ -21,6 +21,11 @@ public class TopFeatureController {
 	@GetMapping("/topfeatures")
 	public List<TopFeatures> getTopFeatures() {
 		
+		String hql = "SELECT tf \r\n" + 
+				"FROM TopFeatures tf \r\n" + 
+				"JOIN FETCH tf.midFeatures mf \r\n" + 
+				"JOIN FETCH mf.bottomFeatures bf";
+		
 		return topFeatureRepository .findAll();
 	}
 	
