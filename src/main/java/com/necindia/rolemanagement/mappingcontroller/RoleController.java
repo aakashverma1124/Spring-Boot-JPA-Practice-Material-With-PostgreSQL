@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,15 +47,14 @@ public class RoleController {
     }
 	
 	@PutMapping("/updateRole/{id}")
+	@Transactional
     public ResponseEntity<Role> updateRole(@PathVariable(value = "id") Integer roleId,
          @Valid @RequestBody Role roleDetails) throws Exception {
         Role role = roleRepository.findById(roleId)
         .orElseThrow(() -> new Exception("Role not found for id :: " + roleId));
-        roleRepository.delete(role);
-	    role.setRoleId(roleDetails.getRoleId());
 	    role.setRoleName(roleDetails.getRoleName());
 	    role.setListOfRoleTop(roleDetails.getListOfRoleTop());
-	    final Role updateRole = roleRepository.save(role);
+	    Role updateRole = roleRepository.save(role);
 	    return ResponseEntity.ok(updateRole);
     }
 	
@@ -63,7 +63,6 @@ public class RoleController {
          throws Exception {
         Role role = roleRepository.findById(roleId)
        .orElseThrow(() -> new Exception("Role not found for this id :: " + roleId));
-
         roleRepository.delete(role);
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", Boolean.TRUE);

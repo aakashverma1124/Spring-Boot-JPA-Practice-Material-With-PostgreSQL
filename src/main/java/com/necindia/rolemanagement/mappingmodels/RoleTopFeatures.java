@@ -33,7 +33,7 @@ public class RoleTopFeatures {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column(name = "role_top_feature_id", unique = true, nullable = false)
 	private int roleTopFeatureId;
-	
+//	
 	
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = Role.class)
 	@JoinColumn(name = "fk_role_id", referencedColumnName = "role_id")

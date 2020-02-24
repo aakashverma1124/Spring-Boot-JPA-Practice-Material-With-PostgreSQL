@@ -1,5 +1,6 @@
 package com.necindia.rolemanagement.mappingmodels;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -23,17 +24,22 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(name = "role")
 @JsonIgnoreProperties(ignoreUnknown = true, allowGetters = true)
-public class Role {
+public class Role implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "role_id", unique = true, nullable = false)
+	@Column(name = "role_id", nullable = false)
 	private int roleId;
 	
 	@Column(name = "role_name")
 	private String roleName;
 	
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL,  fetch = FetchType.LAZY)
 	@JoinColumn(name = "fk_role_id", referencedColumnName = "role_id")
 	List<RoleTopFeatures> listOfRoleTop;
 	
@@ -79,6 +85,6 @@ public class Role {
 	public String toString() {
 		return "Role [roleId=" + roleId + ", roleName=" + roleName + ", listOfRoleTop=" + listOfRoleTop + "]";
 	}
-	
+
 
 }

@@ -1,5 +1,6 @@
 package com.necindia.rolemanagement.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,25 +9,35 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.necindia.rolemanagement.SpringJPADao;
+import com.necindia.rolemanagement.dto.TopFeaturesDTO;
+//import com.necindia.rolemanagement.SpringJPADao;
 import com.necindia.rolemanagement.models.TopFeatures;
 import com.necindia.rolemanagement.repository.TopFeaturesRepository;
 
 @RestController
-@RequestMapping("/role-management")
+@RequestMapping("/rolemanagement")
 public class TopFeatureController {
 	
 	@Autowired
 	private TopFeaturesRepository topFeatureRepository;	
 	
-	@GetMapping("/topfeatures")
-	public List<TopFeatures> getTopFeatures() {
+	@Autowired
+	private SpringJPADao springJPADao;
+	
+	@GetMapping("/features")
+	public List<TopFeaturesDTO> getTopFeatures()  throws Exception {
 		
-		String hql = "SELECT tf \r\n" + 
-				"FROM TopFeatures tf \r\n" + 
-				"JOIN FETCH tf.midFeatures mf \r\n" + 
-				"JOIN FETCH mf.bottomFeatures bf";
+		//springJPADao.getAllData();
+		List<TopFeatures> data=topFeatureRepository.findAll();
+		List<TopFeaturesDTO> dataDTO=new ArrayList<TopFeaturesDTO>(); 
+		data.stream().forEach(obj->{
+			TopFeaturesDTO topFeaturesDTO=springJPADao.getAllData(obj);
+			dataDTO.add(topFeaturesDTO);
+		});
 		
-		return topFeatureRepository .findAll();
+		return dataDTO;
 	}
 	
 	@GetMapping("/topfeatures/{id}")

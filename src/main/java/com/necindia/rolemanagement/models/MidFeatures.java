@@ -40,8 +40,12 @@ public class MidFeatures {
 	@JoinColumn(name = "fk_top_feature_id", referencedColumnName = "top_feature_id")
 	private TopFeatures topFeatures;
 
-	@OneToMany(fetch = FetchType.LAZY)
+	@OneToMany(fetch = FetchType.LAZY,mappedBy = "midFeatures")
+	@JsonIgnore
 	private List<BottomFeatures> bottomFeatures;
+	
+	
+	
 
 	public TopFeatures getTopFeatures() {
 		return topFeatures;
