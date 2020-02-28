@@ -5,8 +5,9 @@ import javax.persistence.PersistenceContext;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import com.necindia.rolemanagement.dto.RoleDTO;
 import com.necindia.rolemanagement.dto.TopFeaturesDTO;
+import com.necindia.rolemanagement.mappingmodels.Role;
 import com.necindia.rolemanagement.models.TopFeatures;
 
 @Service
@@ -24,12 +25,12 @@ public class SpringJPADao {
 		
 		 TopFeaturesDTO topFeaturesDTO = modelMapper.map(topFeatures, TopFeaturesDTO.class);
 		    return topFeaturesDTO;
-		    
-		    
-		   // return null;
+	
 		
-
-		
-		
+	}
+	
+	public RoleDTO getAllRoles(Role obj) {
+		RoleDTO roles = modelMapper.map(obj, RoleDTO.class);
+		return roles;
 	}
 }
